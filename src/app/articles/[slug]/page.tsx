@@ -1,21 +1,11 @@
-import fs from 'fs/promises';
-import path from 'path';
 import { notFound } from 'next/navigation';
 import React from 'react';
+import { readArticles, Article } from '@/lib/articles';
 
-const dataFile = path.join(process.cwd(), 'src/data/articles.json');
-
-interface Article {
-  title: string;
-  slug: string;
-  content: string;
-  image?: string;
-  date: string;
-}
+/* eslint-disable @next/next/no-img-element */
 
 async function getArticle(slug: string): Promise<Article | undefined> {
-  const data = await fs.readFile(dataFile, 'utf8');
-  const articles: Article[] = JSON.parse(data);
+  const articles = await readArticles();
   return articles.find((a) => a.slug === slug);
 }
 

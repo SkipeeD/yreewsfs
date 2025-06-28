@@ -7,7 +7,9 @@ This project is a very small publishing platform built with Next.js. It was crea
 - Home page that lists all articles
 - About and contact pages
 - `/admin` page with a WYSIWYG editor for adding new articles (uses Quill)
-- Articles are stored in `src/data/articles.json`
+- Articles are stored in a JSON file. Locally this is `src/data/articles.json`, while
+  on Vercel the file is written to `/tmp/articles.json` which persists for the life
+  of the deployment instance only.
 
 ## Development
 
@@ -22,7 +24,7 @@ Open `http://localhost:3000` in your browser. To add an article go to `http://lo
 
 ## Deploying
 
-Deploy the repository to Vercel. Because articles are stored in a JSON file, changes will persist only in the deployment environment. For a production setup consider using a real database.
+Deploy the repository to Vercel and set the `DATA_FILE` environment variable if you want to use a custom storage location. By default Vercel writes to `/tmp/articles.json`, which is removed when the deployment is rebuilt. For a production setup use a persistent database.
 
 Binary image files were removed so the repository contains only text-based assets and can be pushed to GitHub without large files.
 
